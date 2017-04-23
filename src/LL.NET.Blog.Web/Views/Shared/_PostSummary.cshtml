@@ -1,0 +1,18 @@
+﻿@model Post
+<div class="card card-block post-card">
+    <div class="post-preview">
+        <h3 class="post-title"><a href="/@Model.Slug">@Model.Title</a></h3>
+        <p class="post-meta">
+            <i class="fa fa-calendar"></i> @Model.DatePublished.AddHours(-4).ToString("MMMM dd, yyyy")
+            <i class="fa fa-edit"></i> Larry Burris
+            <i class="fa fa-comments-o"></i> <span class="disqus-comment-count" data-disqus-identifier="@Model.DisqusId">No Comments</span>.
+            <br />
+            <i class="fa fa-tags"></i>
+            @foreach (var tag in Model.Tags)
+            {
+                <a asp-controller="Tag" asp-action="Index" asp-route-tag="@tag.Value" asp-route-page="">@tag.Value</a>
+            }
+        </p>
+        @Html.Raw(Model.GetSummary())
+    </div>
+</div>
