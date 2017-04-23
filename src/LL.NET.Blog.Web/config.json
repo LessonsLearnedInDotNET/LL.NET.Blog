@@ -1,0 +1,28 @@
+﻿{
+  "BlogDb": {
+    "ConnectionString": "Server=(localdb)\\MSSQLLocalDB;Database=LL.NET.Blog.Db;Trusted_Connection=True;MultipleActiveResultsets=true;ConnectRetryCount=5;ConnectRetryInterval=10;Connect Timeout=5;",
+    "TestData": "True"
+  },
+  "Disqus": {
+    "BlogName": "LessonsLearnedIn.NET"
+  },
+  "MailService": {
+    "ApiKey": "FOOBAR",
+    "ApiUser": "FOOBAR",
+    "Receiver": "shawn@lessonslearnedin.net"
+  },
+  "MetaWeblog": {
+    "StoragePath": "/img/media/"
+  },
+  "AdService": {
+    "Client": "Add Google Client ID",
+    "Slot": "Add Ad Slot Number"
+  },
+  "Google": {
+    "Analytics": "Get Your GA Number"
+  },
+  "BlobService": {
+    "Account": "FOO",
+    "Key": "BAR"
+  }
+}
