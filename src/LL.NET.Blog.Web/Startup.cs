@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using LL.NET.Blog.Data.Repositories;
+using Newtonsoft.Json.Serialization;
+using LL.NET.Blog.Core.Services;
+using LL.NET.Blog.Web.Services.Mail;
 
 namespace LL.NET.Blog.Web
 {
@@ -36,13 +35,16 @@ namespace LL.NET.Blog.Web
             if (_config["BlogDb:TestData"] == "True")
             {
                 services.AddScoped<IBlogRepository, MemoryRepository>();
+                services.AddScoped<IMailService, LoggingMailService>();
             }
             else
             {
                 //services.AddScoped<IBlogRepository, DbRepository>();
+                services.AddScoped<IMailService, SendGridMailService>();
             }
             
-            services.AddMvc();
+            var mvcBuilder = services.AddMvc();
+            mvcBuilder.AddJsonOptions(opts => opts.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,12 +63,7 @@ namespace LL.NET.Blog.Web
             
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvc();
         }
     }
 }
