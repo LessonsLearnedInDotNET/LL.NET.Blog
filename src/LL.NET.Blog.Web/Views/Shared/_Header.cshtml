@@ -1,0 +1,31 @@
+﻿@{ 
+    ViewData["Title"] = "Home Page";
+}
+
+<header class="intro-header" style="background-color: #808080">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    @if (ViewBag.PageHeaderTitle != null)
+                    {
+                        <h2>@ViewBag.PageHeaderTitle</h2>
+                    }
+                    else
+                    {
+                        <h2>Lessons Learned in .NET</h2>
+                    }
+                    <hr class="small">
+                    @if (ViewBag.PageHeaderSubtitle != null)
+                    {
+                        <span class="subheading">@ViewBag.PageHeaderSubtitle</span>
+                    }
+                    else
+                    {
+                        <span class="subheading">Example use cases in .NET and related technologies by Larry Burris</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
